@@ -1,0 +1,91 @@
+;; Advanced Kanata configuration for Caps Lock as Vim layer
+
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  ;; Main keys
+  caps
+  ;; Home row and navigation
+  h j k l
+  ;; Word movement
+  w b e
+  ;; Line movement
+  0 4    ;; 0 for start, 4 for $ (Shift+4 = end of line)
+  ;; Page movement
+  u d
+  ;; Document movement
+  g      ;; g and Shift+g for top/bottom
+  ;; Editing
+  i a o x p y
+  ;; Escape
+  q
+  ;; Search
+  / n
+  ;; Undo
+  z
+)
+
+(defalias
+  ;; Caps Lock: tap for caps lock, hold for vim layer
+  cap (tap-hold 200 200 caps (layer-while-held vim))
+)
+
+(deflayer base
+  @cap  ;; Caps Lock with tap-hold behavior
+  ;; All other keys transparent (pass through normally)
+  _ _ _ _        ;; h j k l
+  _ _ _          ;; w b e
+  _ _            ;; 0 4
+  _ _            ;; u d
+  _              ;; g
+  _ _ _ _ _ _    ;; i a o x p y
+  _              ;; q
+  _ _            ;; / n
+  _              ;; z
+)
+
+(deflayer vim
+  _              ;; Caps Lock itself stays transparent
+  
+  ;; Basic Vim navigation (hjkl)
+  left           ;; h - left
+  down           ;; j - down
+  up             ;; k - up
+  rght           ;; l - right
+  
+  ;; Word movement
+  C-rght         ;; w - word forward (Ctrl+Right)
+  C-left         ;; b - word backward (Ctrl+Left)
+  C-rght         ;; e - end of word
+  
+  ;; Line movement
+  home           ;; 0 - beginning of line
+  end            ;; 4 ($ key) - end of line
+  
+  ;; Page movement
+  pgup           ;; u - page up
+  pgdn           ;; d - page down
+  
+  ;; Document movement (g mapped, use with shift in vim layer if needed)
+  C-home         ;; g - go to top of document (gg in Vim)
+  
+  ;; Editing commands
+  end            ;; i - move to end (insert-like position)
+  (macro end rght) ;; a - append after cursor
+  (macro end ret) ;; o - open line below
+  del            ;; x - delete character
+  C-v            ;; p - paste
+  C-c            ;; y - yank/copy
+  
+  ;; Escape key
+  esc            ;; q - escape
+  
+  ;; Search
+  C-f            ;; / - find/search
+  f3             ;; n - next search result
+  
+  ;; Undo
+  C-z            ;; z - undo
+)
