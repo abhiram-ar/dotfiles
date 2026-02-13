@@ -29,7 +29,7 @@
 
 (defalias
   ;; Caps Lock: tap for caps lock, hold for vim layer
-  cap (tap-hold 200 200 caps (layer-while-held vim))
+  cap (tap-hold 100 100 caps (layer-while-held vim))
 )
 
 (deflayer base
