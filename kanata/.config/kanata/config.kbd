@@ -20,7 +20,7 @@
   ;; Editing
   i a o x p y
   ;; Escape
-  q
+  spc
   ;; Search
   / n
   ;; Undo
@@ -41,7 +41,7 @@
   _ _            ;; u d
   _              ;; g
   _ _ _ _ _ _    ;; i a o x p y
-  _              ;; q
+  _              ;; space
   _ _            ;; / n
   _              ;; z
 )
@@ -80,7 +80,7 @@
   C-c            ;; y - yank/copy
   
   ;; Escape key
-  esc            ;; q - escape
+  esc            ;; space - escape
   
   ;; Search
   C-f            ;; / - find/search
